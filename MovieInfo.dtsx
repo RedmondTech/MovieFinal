@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{F6395935-E4C0-451C-B4B7-32E529131B2F}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{C35340EF-E56D-4D2F-BDD2-5CA8DFCF1856}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyotQEQABQ0GWo1nOuXvvoAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACyT7gOsH7pIZVCYPmS5xZ1yjgxSxOfIR8SaBUAofxY6wAAAAAOgAAAAAIAACAAAAA2cV0kRs7rcLUExBwnjDUNTax+ojHVurwWJAOp4skR8iAAAAC5B6zRpBF1gFLu+HQ53b5xU02UZzp6Ngdwlmn22BsbvUAAAADkfQ46NpwKrBqXXmSeG4kBnNySrQMTp9+aO4lS0G9MUjpmeHIXjqbTXRR4Kc51ZZapBKdKK3I3+n5Q3pjxvPxN</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyotQEQABQ0GWo1nOuXvvoAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACu1SD5Sa5Il9BWzscdPZpA0a6ikmlWm3SyyUbQvC6ykwAAAAAOgAAAAAIAACAAAAAgRqiFoMBLaiJESljIeHdT2FJZ0i4geECiIDwaUdL6gyAAAABA56bYIMly3gWsMcedj7uODMOOrGnaNN5RxJUynMj420AAAACWxtmiSa/akQ4RE1hU3USLeuMN6hE1aqjB5RHahrHwv7+o6MVN9ujHUdnszR4nn3Fh3JctvD+++VmGnaoBMeJl</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -37,13 +37,13 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\BUILD WESTERNS MOVIES"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="BUILD WESTERNS"
       DTS:DTSID="{D3D58D95-B231-4A36-A2B7-AA7334327284}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="BUILD WESTERNS MOVIES"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -1320,8 +1320,8 @@ SELECT TOP  3
           Id="Package\Movie ETL"
           TopLeft="58.1249991338699,41.0526323516613" />
         <NodeLayout
-          Size="169.714285714286,42.2857142857143"
-          Id="Package\Execute SQL Task"
+          Size="221.142857142858,42.2857142857143"
+          Id="Package\BUILD WESTERNS MOVIES"
           TopLeft="247.777784341648,40.7727268308648" />
       </GraphLayout>
     </LayoutInfo>
