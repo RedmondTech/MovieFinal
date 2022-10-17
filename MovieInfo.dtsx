@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{C35340EF-E56D-4D2F-BDD2-5CA8DFCF1856}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{CD3FF4AC-C11A-494E-9F2C-20C6DC4D0635}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,13 +29,29 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyotQEQABQ0GWo1nOuXvvoAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACu1SD5Sa5Il9BWzscdPZpA0a6ikmlWm3SyyUbQvC6ykwAAAAAOgAAAAAIAACAAAAAgRqiFoMBLaiJESljIeHdT2FJZ0i4geECiIDwaUdL6gyAAAABA56bYIMly3gWsMcedj7uODMOOrGnaNN5RxJUynMj420AAAACWxtmiSa/akQ4RE1hU3USLeuMN6hE1aqjB5RHahrHwv7+o6MVN9ujHUdnszR4nn3Fh3JctvD+++VmGnaoBMeJl</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyotQEQABQ0GWo1nOuXvvoAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACVrb1qYetBTnyCjS5eqcgVLSTWd0Iozynncm7dQx+NogAAAAAOgAAAAAIAACAAAAAtz6InVP/6PDbTO/bvDsyaG4XU6lDvD9YZtjJQxeSPlyAAAABlLpQnO0cIkyqCA8aw2QnflQ57oRgEfNAQ8G/SsHc58kAAAABGcXFMhT4ODx+UKKO/bESGiZJc+BKHLARZMPpYOa2dSnaYFGoIHTBrqzAk34Ba8zS7kajrkNxwNNbcyq/1JlEY</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\BUILD SCI FI"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Sci Fi Shows and Movies"
+      DTS:DTSID="{29837CA8-3733-43A2-BE7E-E1C9A50B37CB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="BUILD SCI FI"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2D324072-C90B-43A0-BE30-9AD60E4F46A8}"
+          SQLTask:SqlStatementSource="&#xA;    DROP  TABLE IF EXISTS   dbo.SciFi  &#xA;&#x9;CREATE TABLE dbo.SciFi (type nvarchar(max), title nvarchar(max), cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max), builtdate datetime)  &#xA;&#x9;INSERT &#xA;    INTO&#xA;        dbo.SciFi&#xA;        (type, title, cast, release_year, listed_in, description, builtdate) SELECT&#xA;            type,&#xA;            title,&#xA;            cast,&#xA;            release_year,&#xA;            listed_in,&#xA;            description,&#xA;            getdate()   &#xA;        FROM&#xA;            [Datasource].[dbo].[amazon_prime_titles]    &#xA;        WHERE&#xA;            listed_in LIKE '%Science Fiction%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\BUILD WESTERNS MOVIES"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
@@ -44,7 +60,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="BUILD WESTERNS MOVIES"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1316,13 +1332,17 @@ SELECT TOP  3
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
+          Size="221.142857142858,42.2857142857143"
+          Id="Package\BUILD WESTERNS MOVIES"
+          TopLeft="247.777784341648,40.7727268308648" />
+        <NodeLayout
           Size="153.142857142858,42.8571428571429"
           Id="Package\Movie ETL"
           TopLeft="58.1249991338699,41.0526323516613" />
         <NodeLayout
-          Size="221.142857142858,42.2857142857143"
-          Id="Package\BUILD WESTERNS MOVIES"
-          TopLeft="247.777784341648,40.7727268308648" />
+          Size="145.142857142858,42.2857142857143"
+          Id="Package\BUILD SCI FI"
+          TopLeft="378.888898926017,178.454543520596" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1467,15 +1487,20 @@ SELECT TOP  3
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Netflix">
+    design-time-name="Package\Movie ETL\MovieInfo">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\MovieInfo">
+    design-time-name="Package\Movie ETL\Disney">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1501,15 +1526,10 @@ SELECT TOP  3
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Disney">
+    design-time-name="Package\Movie ETL\Netflix">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
