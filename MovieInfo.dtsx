@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{9FDE6008-27F8-443F-9521-BDB4514C89B6}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{640F7CC1-BB92-489E-918B-C6C6C66A9F16}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB76v/MLYBc10GN1YFmpZ0Pd9uGEICeZev7lvMnRbvIvQAAAAAOgAAAAAIAACAAAABNX13dp09xjD+dEk/FKCm6Ia6YfR6Xz8gPBaFHYDNSDCAAAADVC0QvHKw85QQa6XUl2qh62PBgBQCqkhT1FULWufEe6UAAAABkSdSpoQN6AN9pdavHbhMneUM3Soq0cB4AheybfUkNwq4nuGSE55oOR3dpui9DYe7uINiSO8SYTdammk8eZr7K</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADME6dxZ0UiYEYrkDict8somFGdMJ2nbIC78u5Mcpm7IQAAAAAOgAAAAAIAACAAAAD3AjRCubfHHx0EnDX1Ui9YGmspiNe2TCUP9kUnOxCq3iAAAACPdwCV950f58Af8Ed2L08rvK3Z6e5DZwkrmkymRgT8VUAAAAA6GCln8l3dIbXRh4+3CAxA/1eRYn47hLZrpdkbHBC/ixNDvwi1I6VAtDCmai2cduqaBON5sMfSnqDT/yN3+aWY</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,13 +46,30 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABPIPgvCm/111+ModRrJLHpjqQM28XcS9hxNYb6/N7TIgAAAAAOgAAAAAIAACAAAADMeDk8M27+91iF3UiUjXSs31Tt4Ep/rHrYCBeSqO+u5CAAAACrWVVRZOAD2/kQhoyYZJm75/zuIPX95KV5AmT79WYGQUAAAACJM2x8x3kpFIxTaCoq3S0Mni8u+LHprggvPRJKB4LSw8ob2ZjREda9LliZqJ1xOw7lJVxP5JSqiJvbGgDwo5MY</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB9DlVE8SkR6K4YD5OE6C7WkHaoaO/Lo79kIBiwHQqAJQAAAAAOgAAAAAIAACAAAACKD/Qo/hXW3C3xyZFer/WYTvZCWaBMIMiVHWJvaaPAPCAAAACT4bauqqDO1QwAuORssbJyRt7Ytg8IrQIfsVXh4Z/qqEAAAADdVa+hnDyNt3CTtUyR9tQHOdkmZi/A3lrgzTdMemBN1Gxu5aYdANI0I674Tb7k4CpAJkEgLNOpyXf71Phf8wSf</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Build Amazon Genres"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{62D8C12B-1057-4231-AC27-4DA93A7F68EE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Build Amazon Genres"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5F412F21-CC7E-4276-AD39-E738833DA866}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="USE DataSink&#xA;DROP TABLE IF EXISTS dbo.Amazon_Comedy&#xA;&#xA;CREATE TABLE dbo.Amazon_Comedy&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max),updatetime datetime)&#xA;&#xA;INSERT INTO dbo.Amazon_Comedy (type, title, director, cast, release_year, listed_in , description, updatetime)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;&#x9;  ,getdate() updatetime&#xA;  FROM [Datasource].[dbo].[amazon_prime_titles]&#xA;&#xA;  WHERE Listed_IN LIKE '%Comedy%'&#xA;&#xA;USE DataSink&#xA;DROP TABLE IF EXISTS dbo.Amazon_Horror&#xA;&#xA;CREATE TABLE dbo.Amazon_Horror&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max),updatetime datetime)&#xA;&#xA;INSERT INTO dbo.Amazon_Horror (type, title, director, cast, release_year, listed_in , description, updatetime)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;&#x9;  ,getdate() updatetime&#xA;  FROM [Datasource].[dbo].[amazon_prime_titles]&#xA;&#xA;  WHERE Listed_IN LIKE '%Horror%'&#xA;&#xA;  USE DataSink&#xA;DROP TABLE IF EXISTS dbo.Amazon_SciFi&#xA;&#xA;CREATE TABLE dbo.Amazon_SciFi&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max),updatetime datetime)&#xA;&#xA;INSERT INTO dbo.Amazon_SciFi (type, title, director, cast, release_year, listed_in , description, updatetime)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;&#x9;  ,getdate() updatetime&#xA;  FROM [Datasource].[dbo].[amazon_prime_titles]&#xA;&#xA;  WHERE Listed_IN LIKE '%Sci%'&#xA;&#xA;USE DataSink&#xA;DROP TABLE IF EXISTS dbo.Amazon_Western&#xA;&#xA;CREATE TABLE dbo.Amazon_Western&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max),updatetime datetime)&#xA;&#xA;INSERT INTO dbo.Amazon_Western (type, title, director, cast, release_year, listed_in , description, updatetime)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;&#x9;  ,getdate() updatetime&#xA;  FROM [Datasource].[dbo].[amazon_prime_titles]&#xA;&#xA;  WHERE Listed_IN LIKE '%western%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Movie ETL"
       DTS:CreationName="Microsoft.Pipeline"
@@ -92,7 +109,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP 3
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP 3
                    [title]
 	  ,[release_year]
                   ,[description]
@@ -318,7 +335,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP  3
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP  3
        [title]
 	  ,[release_year]
       ,[description]
@@ -532,7 +549,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[MovieInfo_V2]</property>
+                  name="OpenRowset">[dbo].[Movies_MoreInfo]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -541,7 +558,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -613,23 +630,17 @@
                       externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]" />
                     <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
-                      cachedDataType="i2"
-                      cachedName="release_year"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[release_year]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
-                    <inputColumn
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[description]"
                       cachedDataType="nText"
                       cachedName="description"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]" />
                     <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[datestamp]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="datestamp"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[datestamp]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]" />
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -650,17 +661,13 @@
                       dataType="nText"
                       name="country" />
                     <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[release_year]"
-                      dataType="i2"
-                      name="release_year" />
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
+                      dataType="i4"
+                      name="releaseyear" />
                     <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
                       dataType="nText"
-                      name="description" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[datestamp]"
-                      dataType="dbTimeStamp"
-                      name="datestamp" />
+                      name="movieinfo" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -714,7 +721,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">/****** Script for SelectTopNRows command from SSMS  ******/
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP  3
        [title]
 	  ,[release_year]
@@ -1296,6 +1303,84 @@ SELECT TOP  3
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{AFEBF901-CB87-493F-9FB7-CB74F9D71987}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\NETFLIX COMEDY"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Comedy movies from Netflix "
+          DTS:DTSID="{EE8F554E-A8BE-4B56-B458-6E0D767B73CE}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="NETFLIX COMEDY"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{5F412F21-CC7E-4276-AD39-E738833DA866}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="USE DataSink&#xA;DROP TABLE IF EXISTS dbo.Netflix_Comedy&#xA;&#xA;CREATE TABLE dbo.NetFlix_Comedy&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max),updatetime datetime)&#xA;&#xA;INSERT INTO dbo.NetFlix_Comedy (type, title, director, cast, release_year, listed_in , description, updatetime)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;&#x9;  ,getdate() updatetime&#xA;  FROM [Datasource].[dbo].[netflix_titles_csv]&#xA;&#xA;  WHERE Listed_IN LIKE '%Comedy%'&#xA;&#xA;  SELECT * FROM dbo.Netflix_Comedy" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\NETFLIX DOC"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{11F4CC83-EF33-4CD7-8301-2F7A7FB6252D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="NETFLIX DOC"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1A47C6BD-18D6-4947-87E0-4A5696FC813A}"
+              SQLTask:SqlStatementSource="DROP TABLE IF EXISTS dbo.NetFlix_Documentaries " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\NETFLIX HORROR"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Horror Movies From Netflix "
+          DTS:DTSID="{3F8997B3-E70D-4997-AE44-6AC0B4568C14}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="NETFLIX HORROR"
+          DTS:ThreadHint="4">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{5F412F21-CC7E-4276-AD39-E738833DA866}"
+              SQLTask:SqlStatementSource="DROP TABLE IF EXISTS dbo.NetFlix_Horror &#xA;&#xA;CREATE TABLE dbo.NetFlix_Horror&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max))&#xA;&#xA;INSERT INTO dbo.NetFlix_Horror (type, title, director, cast, release_year, listed_in , description)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;  FROM [Datasource].[dbo].[netflix_titles_csv]&#xA;&#xA;  WHERE Listed_IN LIKE '%Horror%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\NETLIX SCI FI"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Sci Fi movies from Netflix "
+          DTS:DTSID="{512412C6-0A30-4B19-BB13-9C504CB8FE27}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="NETLIX SCI FI"
+          DTS:ThreadHint="3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{5F412F21-CC7E-4276-AD39-E738833DA866}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="USE DataSink&#xA;DROP TABLE IF EXISTS dbo.Netflix_SciFi&#xA;&#xA;CREATE TABLE dbo.NetFlix_SciFi&#xA;(type nvarchar(max), title nvarchar(max), director nvarchar(max) , cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max),updatetime datetime)&#xA;&#xA;INSERT INTO dbo.NetFlix_SciFi (type, title, director, cast, release_year, listed_in , description, updatetime)&#xA;SELECT&#xA;       [type]&#xA;      ,[title]&#xA;      ,[director]&#xA;      ,[cast]&#xA;  &#xA;      ,[release_year]&#xA;      ,[listed_in]&#xA;      ,[description]&#xA;&#x9;  ,getdate() updatetime&#xA;  FROM [Datasource].[dbo].[netflix_titles_csv]&#xA;&#xA;  WHERE Listed_IN LIKE '%Sci%'&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1308,11 +1393,38 @@ SELECT TOP  3
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
           Size="153.142857142858,42.8571428571429"
           Id="Package\Movie ETL"
-          TopLeft="58.1249991338699,41.0526323516613" />
+          TopLeft="5.5000000000001,56.9285714285715" />
+        <NodeLayout
+          Size="174.857142857143,42.2857142857143"
+          Id="Package\Sequence Container\NETFLIX COMEDY"
+          TopLeft="5.50000000000001,5.49999999999997" />
+        <NodeLayout
+          Size="169.714285714286,42.2857142857143"
+          Id="Package\Sequence Container\NETFLIX DOC"
+          TopLeft="241.071428571429,5.49999999999985" />
+        <NodeLayout
+          Size="175.428571428572,42.2857142857143"
+          Id="Package\Sequence Container\NETFLIX HORROR"
+          TopLeft="471.214285714286,5.49999999999985" />
+        <NodeLayout
+          Size="150.857142857143,42.2857142857143"
+          Id="Package\Sequence Container\NETLIX SCI FI"
+          TopLeft="707.5,5.49999999999985" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="864,102.857142857143"
+          Size="864,145.714285714286"
+          Id="Package\Sequence Container"
+          TopLeft="219.071428571429,5.50000000000003" />
+        <NodeLayout
+          Size="185.142857142858,42.2857142857143"
+          Id="Package\Build Amazon Genres"
+          TopLeft="1143.5,57.2142857142856" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1320,71 +1432,27 @@ SELECT TOP  3
     design-time-name="Package\Movie ETL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="122.857142857143,42.8571428571429"
-          Id="Package\Movie ETL\Union All"
-          TopLeft="192.833333333333,108.166666666667" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\MovieInfo"
           TopLeft="191.5,210.833333333334" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
-          Id="Package\Movie ETL\Netflix"
-          TopLeft="191.5,5.50000000000004" />
+          Id="Package\Movie ETL\Disney"
+          TopLeft="6.74999998137357,5.50000000000004" />
+        <NodeLayout
+          Size="122.857142857143,42.8571428571429"
+          Id="Package\Movie ETL\Union All"
+          TopLeft="192.833333333333,108.166666666667" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Amazon"
           TopLeft="377.5,5.50000000000004" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
-          Id="Package\Movie ETL\Disney"
-          TopLeft="6.74999998137357,5.50000000000004" />
-        <EdgeLayout
-          Id="Package\Movie ETL.Paths[Union All Output 1]"
-          TopLeft="254.166666666667,150.833333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Movie ETL.Paths[OLE DB Source Output2]"
-          TopLeft="254.166666666667,48.1666666666667">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
-              Start="0,0"
-              End="0,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Id="Package\Movie ETL\Netflix"
+          TopLeft="191.5,5.50000000000004" />
         <EdgeLayout
           Id="Package\Movie ETL.Paths[OLE DB Source Output1]"
           TopLeft="69.4166666480402,48.1666666666667">
@@ -1416,7 +1484,9 @@ SELECT TOP  3
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1450,12 +1520,70 @@ SELECT TOP  3
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Movie ETL.Paths[Union All Output 1]"
+          TopLeft="254.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Movie ETL.Paths[OLE DB Source Output2]"
+          TopLeft="254.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie ETL\Netflix">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Movie ETL\MovieInfo">
     <Properties>
@@ -1492,14 +1620,6 @@ SELECT TOP  3
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Netflix">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
