@@ -1,0 +1,1379 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/17/2022 8:19:13 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="EXTCO-P-U-06"
+  DTS:CreatorName="AzureAD\RedmondO'Hanlon"
+  DTS:DTSID="{E7AF32B9-BBAF-4C59-9F63-E6E1D8E94060}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{8371FBDA-A277-4C47-80F2-4855FBD1A6EE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQLVM.Datasource.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1A47C6BD-18D6-4947-87E0-4A5696FC813A}"
+      DTS:ObjectName="SQLVM.Datasource.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=SQLVM;User ID=sa;Initial Catalog=Datasource;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package-{1A47C6BD-18D6-4947-87E0-4A5696FC813A}SQLVM.Datasource.sa;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACzoSyZUSAk4lJNsHGs6h6Y8xCKLsKjbGuS6xoTgpyjPwAAAAAOgAAAAAIAACAAAADxz86O9WIzqcUmrWskANFbsZXQZwVagZ0IH+PejT4ykiAAAADW6aMC4HoWfqRFVzq6mAtEq8MFCDx6l8TAMfdK7Cd2ZEAAAACsaD7h3uSdx5hP7zJTWAiVyOO4gFQGFB3zkQ9kZ3it46NeUz70NNd9m4ZBCwQE/CbcGG8d6jqN6+smy1MDyYGt</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Movie ETL"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5992A6F6-DCB6-461E-A687-65BA9DFF04F2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Movie ETL"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Movie ETL\Amazon"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Amazon"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[amazon_prime_titles]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP 3
+                   [title]
+	  ,[release_year]
+                  ,[description]
+	  ,[director]
+	  ,[cast]
+	  ,[country]
+  FROM [Datasource].[dbo].[amazon_prime_titles]
+
+  WHERE Type='Movie'
+
+  ORDER BY NEWID()</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie ETL\Amazon.Connections[OleDbConnection]"
+                  connectionManagerID="{2DB60944-7C40-427E-AEF2-FD8C6A155E90}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLVM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[title]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[title]"
+                      name="title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[release_year]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[release_year]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[release_year]"
+                      name="release_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[description]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[description]"
+                      name="description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[director]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[director]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[director]"
+                      name="director"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[cast]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[cast]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[cast]"
+                      name="cast"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[country]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      dataType="nText"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[release_year]"
+                      dataType="i2"
+                      name="release_year" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      dataType="nText"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[director]"
+                      dataType="nText"
+                      name="director" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[cast]"
+                      dataType="nText"
+                      name="cast" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      dataType="nText"
+                      name="country" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[title]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[title]"
+                      name="title" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[release_year]"
+                      dataType="i2"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[release_year]"
+                      name="release_year" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[description]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[director]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[director]"
+                      name="director" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[cast]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[cast]"
+                      name="cast" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[country]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie ETL\Disney"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Disney"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[disney_plus_titles]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP  3
+       [title]
+	  ,[release_year]
+      ,[description]
+	  ,[director]
+      ,[cast]
+      ,[country]
+  FROM [Datasource].[dbo].[disney_plus_titles]
+  WHERE type='Movie'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie ETL\Disney.Connections[OleDbConnection]"
+                  connectionManagerID="{2DB60944-7C40-427E-AEF2-FD8C6A155E90}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLVM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[title]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[title]"
+                      name="title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[release_year]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[release_year]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[release_year]"
+                      name="release_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[description]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[description]"
+                      name="description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[director]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[director]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[director]"
+                      name="director"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[cast]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[cast]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[cast]"
+                      name="cast"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[country]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      dataType="nText"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[release_year]"
+                      dataType="i2"
+                      name="release_year" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      dataType="nText"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[director]"
+                      dataType="nText"
+                      name="director" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[cast]"
+                      dataType="nText"
+                      name="cast" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      dataType="nText"
+                      name="country" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[title]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[title]"
+                      name="title" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[release_year]"
+                      dataType="i2"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[release_year]"
+                      name="release_year" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[description]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[director]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[director]"
+                      name="director" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[cast]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[cast]"
+                      name="cast" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[country]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie ETL\MovieInfo"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MovieInfo"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Movies_MoreInfo]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie ETL\MovieInfo.Connections[OleDbConnection]"
+                  connectionManagerID="{2D324072-C90B-43A0-BE30-9AD60E4F46A8}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQLVM.DataSink.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[title]"
+                      cachedDataType="nText"
+                      cachedName="title"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="nText"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[director]"
+                      cachedDataType="nText"
+                      cachedName="director"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[director]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[director]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[cast]"
+                      cachedDataType="nText"
+                      cachedName="cast"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[cast]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[cast]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[country]"
+                      cachedDataType="nText"
+                      cachedName="country"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                      dataType="nText"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
+                      dataType="nText"
+                      name="movieinfo" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
+                      dataType="i4"
+                      name="releaseyear" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[director]"
+                      dataType="nText"
+                      name="director" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[cast]"
+                      dataType="nText"
+                      name="cast" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                      dataType="nText"
+                      name="country" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Movie ETL\MovieInfo.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\MovieInfo.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\MovieInfo.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie ETL\MovieInfo.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\MovieInfo.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie ETL\Netflix"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Netflix"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP  3
+       [title]
+	  ,[release_year]
+      ,[description]
+	  ,[director]
+      ,[cast]
+      ,[country]
+  FROM [Datasource].[dbo].[netflix_titles_csv]
+  WHERE type='Movie'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie ETL\Netflix.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQLVM.Datasource.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQLVM.Datasource.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[title]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[title]"
+                      name="title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[release_year]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[release_year]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[release_year]"
+                      name="release_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[description]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[description]"
+                      name="description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[director]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[director]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[director]"
+                      name="director"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[cast]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[cast]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[cast]"
+                      name="cast"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[country]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[title]"
+                      dataType="nText"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[release_year]"
+                      dataType="i2"
+                      name="release_year" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      dataType="nText"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[director]"
+                      dataType="nText"
+                      name="director" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[cast]"
+                      dataType="nText"
+                      name="cast" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      dataType="nText"
+                      name="country" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[title]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[title]"
+                      name="title" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[release_year]"
+                      dataType="i2"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[release_year]"
+                      name="release_year" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[description]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[director]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[director]"
+                      name="director" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[cast]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[cast]"
+                      name="cast" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[country]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie ETL\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Movie ETL\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[title]"
+                      cachedDataType="nText"
+                      cachedName="title"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[release_year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[description]"
+                      cachedDataType="nText"
+                      cachedName="description"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[description]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[director]"
+                      cachedDataType="nText"
+                      cachedName="director"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[director]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[director]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[cast]"
+                      cachedDataType="nText"
+                      cachedName="cast"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[cast]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[cast]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[country]"
+                      cachedDataType="nText"
+                      cachedName="country"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[country]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Movie ETL\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[title]"
+                      cachedDataType="nText"
+                      cachedName="title"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[release_year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[description]"
+                      cachedDataType="nText"
+                      cachedName="description"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[description]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[director]"
+                      cachedDataType="nText"
+                      cachedName="director"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[director]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[director]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[cast]"
+                      cachedDataType="nText"
+                      cachedName="cast"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[cast]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[cast]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[country]"
+                      cachedDataType="nText"
+                      cachedName="country"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[country]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Movie ETL\Union All.Inputs[Union All Input 3]"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[title]"
+                      cachedDataType="nText"
+                      cachedName="title"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[release_year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[description]"
+                      cachedDataType="nText"
+                      cachedName="description"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[description]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[director]"
+                      cachedDataType="nText"
+                      cachedName="director"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[director]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[director]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[cast]"
+                      cachedDataType="nText"
+                      cachedName="cast"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[cast]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[cast]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[country]"
+                      cachedDataType="nText"
+                      cachedName="country"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[country]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Movie ETL\Union All.Inputs[Union All Input 4]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 4">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Movie ETL\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]"
+                      name="title" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]"
+                      dataType="i2"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]"
+                      name="release_year" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[director]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[director]"
+                      name="director" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[cast]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[cast]"
+                      name="cast" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]"
+                      dataType="nText"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]"
+                      name="country" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Movie ETL.Paths[OLE DB Source Output]"
+              endId="Package\Movie ETL\Union All.Inputs[Union All Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Movie ETL.Paths[OLE DB Source Output1]"
+              endId="Package\Movie ETL\Union All.Inputs[Union All Input 2]"
+              name="OLE DB Source Output"
+              startId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Movie ETL.Paths[OLE DB Source Output2]"
+              endId="Package\Movie ETL\Union All.Inputs[Union All Input 3]"
+              name="OLE DB Source Output"
+              startId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Movie ETL.Paths[Union All Output 1]"
+              endId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Movie ETL\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\Movie ETL"
+          TopLeft="58.1249991338699,41.0526323516613" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Movie ETL">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125.333333333334,42.6666666666667"
+          Id="Package\Movie ETL\Netflix"
+          TopLeft="191.5,5.50000000000004" />
+        <NodeLayout
+          Size="122.666666666667,42.6666666666667"
+          Id="Package\Movie ETL\Union All"
+          TopLeft="192.833333333333,108.166666666667" />
+        <NodeLayout
+          Size="125.333333333334,42.6666666666667"
+          Id="Package\Movie ETL\Amazon"
+          TopLeft="377.5,5.50000000000004" />
+        <NodeLayout
+          Size="125.333333333334,42.6666666666667"
+          Id="Package\Movie ETL\Disney"
+          TopLeft="5.50000000000002,5.50000000000004" />
+        <NodeLayout
+          Size="125.333333333334,42.6666666666667"
+          Id="Package\Movie ETL\MovieInfo"
+          TopLeft="191.5,210.833333333334" />
+        <EdgeLayout
+          Id="Package\Movie ETL.Paths[Union All Output 1]"
+          TopLeft="254.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Movie ETL.Paths[OLE DB Source Output2]"
+          TopLeft="254.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Movie ETL.Paths[OLE DB Source Output1]"
+          TopLeft="68.1666666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="157.333333333333,60.0000000000001"
+              Start="0,0"
+              End="157.333333333333,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1489361702128" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.1489361702128"
+                    Point2="0,39.1489361702128"
+                    Point3="4,39.1489361702128" />
+                  <mssgle:LineSegment
+                    End="153.333333333333,39.1489361702128" />
+                  <mssgle:CubicBezierSegment
+                    Point1="153.333333333333,39.1489361702128"
+                    Point2="157.333333333333,39.1489361702128"
+                    Point3="157.333333333333,43.1489361702128" />
+                  <mssgle:LineSegment
+                    End="157.333333333333,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Movie ETL.Paths[OLE DB Source Output]"
+          TopLeft="440.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-157.333333333333,60.0000000000001"
+              Start="0,0"
+              End="-157.333333333333,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1489361702128" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.1489361702128"
+                    Point2="0,39.1489361702128"
+                    Point3="-4,39.1489361702128" />
+                  <mssgle:LineSegment
+                    End="-153.333333333333,39.1489361702128" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-153.333333333333,39.1489361702128"
+                    Point2="-157.333333333333,39.1489361702128"
+                    Point3="-157.333333333333,43.1489361702128" />
+                  <mssgle:LineSegment
+                    End="-157.333333333333,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie ETL\Netflix">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie ETL\MovieInfo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie ETL\Amazon">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie ETL\Disney">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

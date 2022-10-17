@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="SQLVM"
+  DTS:DTSID="{2DB60944-7C40-427E-AEF2-FD8C6A155E90}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=SQLVM;User ID=sa;Initial Catalog=Datasource;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-SSIS_GitHub_Test-{2DB60944-7C40-427E-AEF2-FD8C6A155E90}SQLVM;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAACAAAAAAAQZgAAAAEAACAAAAA0vKiG6QJ3TAu8sate+55hIhzL7GXz1QR61X8e3f12SQAAAAAOgAAAAAIAACAAAACQKts8AOXI4+UbMoFruGXHM02x+WYndfTNfQNlpb2+5YAAAAAVL1jd5/70LH7fo3WmmTkMjMJzVjBtnSHyLZpsmaXkJdQ7FfNn1KNeny0ZzGaxFq5gY2qi+coIDJeczXv/WFfrumh+dEDFSwEoFmvwN7fwyDN4TpJjfqfLocMHSLcy9eU/LKaak5/tBAtbfDmFz8mFohXk60+Xoj0l7n6A0ySeJEAAAABGHiZ0CK2eF2RebGsgX1/P/KZz7jAf+xcSV1H3jcts6LpOqwIniZVzQct40xuBdIyPPl/rVgSIC/4pe54JJyEI</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
