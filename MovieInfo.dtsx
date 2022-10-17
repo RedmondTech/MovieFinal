@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{9FDE6008-27F8-443F-9521-BDB4514C89B6}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{CF17EF81-B412-496B-A02C-7AED4A9BB839}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB76v/MLYBc10GN1YFmpZ0Pd9uGEICeZev7lvMnRbvIvQAAAAAOgAAAAAIAACAAAABNX13dp09xjD+dEk/FKCm6Ia6YfR6Xz8gPBaFHYDNSDCAAAADVC0QvHKw85QQa6XUl2qh62PBgBQCqkhT1FULWufEe6UAAAABkSdSpoQN6AN9pdavHbhMneUM3Soq0cB4AheybfUkNwq4nuGSE55oOR3dpui9DYe7uINiSO8SYTdammk8eZr7K</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACRXiYIOEp7DtlLHszKbbp9X/1LJCupjYiLTP8cLLc5AQAAAAAOgAAAAAIAACAAAACyF8ZUijNHGXKL0TZKOxPNgtVIYFWYxEzMdjPYTsmFkiAAAACXRojLTSqOkwsPSf2yn2BCIUeKureb0Y6llvoZ55iuDEAAAADBfps1/+9psrOYi0ZMQPV7DRirhKpU83D2XOMiWm8yfE+dl+a6hiNssk2cTqL1ddrDJkrHv/d5AWVZ0ioAdJV4</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -46,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABPIPgvCm/111+ModRrJLHpjqQM28XcS9hxNYb6/N7TIgAAAAAOgAAAAAIAACAAAADMeDk8M27+91iF3UiUjXSs31Tt4Ep/rHrYCBeSqO+u5CAAAACrWVVRZOAD2/kQhoyYZJm75/zuIPX95KV5AmT79WYGQUAAAACJM2x8x3kpFIxTaCoq3S0Mni8u+LHprggvPRJKB4LSw8ob2ZjREda9LliZqJ1xOw7lJVxP5JSqiJvbGgDwo5MY</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC1GWFqbvEjj9nelZHysiiz0WCQxG8agHMQuZcaJyz2oAAAAAAOgAAAAAIAACAAAABJ5uHCqbTboU21+weIddP3x0rXbaHQKEx6JLD8PrqxeCAAAAD5gYN/9ZpeRyvT3TtUEnyVTQn4XGajt9XH8C52qAEqi0AAAAB2Z4qEokPJ26JHinGdvt6SBahZxuYQy6mxzBsLkSSjkD9PG0dCRW1g4gAfIlo30bpaHaogf42/GmRrmr2VqN2J</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -92,7 +92,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP 3
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP 3
                    [title]
 	  ,[release_year]
                   ,[description]
@@ -318,7 +318,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP  3
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP  3
        [title]
 	  ,[release_year]
       ,[description]
@@ -532,7 +532,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[MovieInfo_V2]</property>
+                  name="OpenRowset">[dbo].[Movies_MoreInfo]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -541,7 +541,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -613,23 +613,17 @@
                       externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]" />
                     <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
-                      cachedDataType="i2"
-                      cachedName="release_year"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[release_year]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
-                    <inputColumn
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[description]"
                       cachedDataType="nText"
                       cachedName="description"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]" />
                     <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[datestamp]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="datestamp"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[datestamp]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]" />
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -650,17 +644,13 @@
                       dataType="nText"
                       name="country" />
                     <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[release_year]"
-                      dataType="i2"
-                      name="release_year" />
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
+                      dataType="i4"
+                      name="releaseyear" />
                     <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
                       dataType="nText"
-                      name="description" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[datestamp]"
-                      dataType="dbTimeStamp"
-                      name="datestamp" />
+                      name="movieinfo" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -714,7 +704,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">/****** Script for SelectTopNRows command from SSMS  ******/
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP  3
        [title]
 	  ,[release_year]
@@ -1327,20 +1317,20 @@ SELECT TOP  3
           TopLeft="192.833333333333,108.166666666667" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
-          Id="Package\Movie ETL\MovieInfo"
-          TopLeft="191.5,210.833333333334" />
-        <NodeLayout
-          Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Netflix"
           TopLeft="191.5,5.50000000000004" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
-          Id="Package\Movie ETL\Amazon"
-          TopLeft="377.5,5.50000000000004" />
+          Id="Package\Movie ETL\MovieInfo"
+          TopLeft="191.5,210.833333333334" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Disney"
           TopLeft="6.74999998137357,5.50000000000004" />
+        <NodeLayout
+          Size="125.142857142858,42.8571428571429"
+          Id="Package\Movie ETL\Amazon"
+          TopLeft="377.5,5.50000000000004" />
         <EdgeLayout
           Id="Package\Movie ETL.Paths[Union All Output 1]"
           TopLeft="254.166666666667,150.833333333333">
