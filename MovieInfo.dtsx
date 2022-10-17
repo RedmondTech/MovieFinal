@@ -11,11 +11,28 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{8371FBDA-A277-4C47-80F2-4855FBD1A6EE}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{9FDE6008-27F8-443F-9521-BDB4514C89B6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQLVM.DataSink.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5F412F21-CC7E-4276-AD39-E738833DA866}"
+      DTS:ObjectName="SQLVM.DataSink.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=SQLVM;User ID=sa;Initial Catalog=DataSink;Provider=SQLNCLI11.1;Application Name=SSIS-Package-{5F412F21-CC7E-4276-AD39-E738833DA866}SQLVM.DataSink.sa;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB76v/MLYBc10GN1YFmpZ0Pd9uGEICeZev7lvMnRbvIvQAAAAAOgAAAAAIAACAAAABNX13dp09xjD+dEk/FKCm6Ia6YfR6Xz8gPBaFHYDNSDCAAAADVC0QvHKw85QQa6XUl2qh62PBgBQCqkhT1FULWufEe6UAAAABkSdSpoQN6AN9pdavHbhMneUM3Soq0cB4AheybfUkNwq4nuGSE55oOR3dpui9DYe7uINiSO8SYTdammk8eZr7K</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[SQLVM.Datasource.sa]"
       DTS:CreationName="OLEDB"
@@ -29,7 +46,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACzoSyZUSAk4lJNsHGs6h6Y8xCKLsKjbGuS6xoTgpyjPwAAAAAOgAAAAAIAACAAAADxz86O9WIzqcUmrWskANFbsZXQZwVagZ0IH+PejT4ykiAAAADW6aMC4HoWfqRFVzq6mAtEq8MFCDx6l8TAMfdK7Cd2ZEAAAACsaD7h3uSdx5hP7zJTWAiVyOO4gFQGFB3zkQ9kZ3it46NeUz70NNd9m4ZBCwQE/CbcGG8d6jqN6+smy1MDyYGt</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxq/sgx2tY0GetdY/uww0qgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABPIPgvCm/111+ModRrJLHpjqQM28XcS9hxNYb6/N7TIgAAAAAOgAAAAAIAACAAAADMeDk8M27+91iF3UiUjXSs31Tt4Ep/rHrYCBeSqO+u5CAAAACrWVVRZOAD2/kQhoyYZJm75/zuIPX95KV5AmT79WYGQUAAAACJM2x8x3kpFIxTaCoq3S0Mni8u+LHprggvPRJKB4LSw8ob2ZjREda9LliZqJ1xOw7lJVxP5JSqiJvbGgDwo5MY</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -75,13 +92,14 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP 3
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP 3
                    [title]
 	  ,[release_year]
                   ,[description]
 	  ,[director]
 	  ,[cast]
 	  ,[country]
+,getdate() DateStamp
   FROM [Datasource].[dbo].[amazon_prime_titles]
 
   WHERE Type='Movie'
@@ -112,8 +130,8 @@
               <connections>
                 <connection
                   refId="Package\Movie ETL\Amazon.Connections[OleDbConnection]"
-                  connectionManagerID="{2DB60944-7C40-427E-AEF2-FD8C6A155E90}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[SQLVM]"
+                  connectionManagerID="Package.ConnectionManagers[SQLVM.Datasource.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQLVM.Datasource.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -176,6 +194,15 @@
                       lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[country]"
                       name="country"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[DateStamp]"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[DateStamp]"
+                      name="DateStamp"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -203,6 +230,10 @@
                       refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      name="DateStamp" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -240,6 +271,11 @@
                       dataType="nText"
                       lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[country]"
                       name="country" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[DateStamp]"
+                      name="DateStamp" />
                     <outputColumn
                       refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -282,13 +318,14 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT TOP  3
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP  3
        [title]
 	  ,[release_year]
       ,[description]
 	  ,[director]
       ,[cast]
       ,[country]
+      ,getdate() DateStamp
   FROM [Datasource].[dbo].[disney_plus_titles]
   WHERE type='Movie'</property>
                 <property
@@ -316,8 +353,8 @@
               <connections>
                 <connection
                   refId="Package\Movie ETL\Disney.Connections[OleDbConnection]"
-                  connectionManagerID="{2DB60944-7C40-427E-AEF2-FD8C6A155E90}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[SQLVM]"
+                  connectionManagerID="Package.ConnectionManagers[SQLVM.Datasource.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQLVM.Datasource.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -380,6 +417,15 @@
                       lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[country]"
                       name="country"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[DateStamp]"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[DateStamp]"
+                      name="DateStamp"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -407,6 +453,10 @@
                       refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      name="DateStamp" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -445,6 +495,11 @@
                       lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[country]"
                       name="country" />
                     <outputColumn
+                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[DateStamp]"
+                      name="DateStamp" />
+                    <outputColumn
                       refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -477,7 +532,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Movies_MoreInfo]</property>
+                  name="OpenRowset">[MovieInfo_V2]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -486,7 +541,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -520,8 +575,8 @@
               <connections>
                 <connection
                   refId="Package\Movie ETL\MovieInfo.Connections[OleDbConnection]"
-                  connectionManagerID="{2D324072-C90B-43A0-BE30-9AD60E4F46A8}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[SQLVM.DataSink.sa]"
+                  connectionManagerID="Package.ConnectionManagers[SQLVM.DataSink.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQLVM.DataSink.sa]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -540,18 +595,6 @@
                       externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[title]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[title]" />
                     <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[description]"
-                      cachedDataType="nText"
-                      cachedName="description"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]" />
-                    <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
-                      cachedDataType="i2"
-                      cachedName="release_year"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
-                    <inputColumn
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[director]"
                       cachedDataType="nText"
                       cachedName="director"
@@ -569,6 +612,24 @@
                       cachedName="country"
                       externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[release_year]"
+                      cachedDataType="i2"
+                      cachedName="release_year"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[release_year]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[release_year]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="nText"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[description]" />
+                    <inputColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[datestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="datestamp"
+                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[datestamp]"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -576,14 +637,6 @@
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[title]"
                       dataType="nText"
                       name="title" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[movieinfo]"
-                      dataType="nText"
-                      name="movieinfo" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[releaseyear]"
-                      dataType="i4"
-                      name="releaseyear" />
                     <externalMetadataColumn
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[director]"
                       dataType="nText"
@@ -596,6 +649,18 @@
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[release_year]"
+                      dataType="i2"
+                      name="release_year" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="nText"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[datestamp]"
+                      dataType="dbTimeStamp"
+                      name="datestamp" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -649,7 +714,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/****** Script for SelectTopNRows command from SSMS  ******/
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">/****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP  3
        [title]
 	  ,[release_year]
@@ -657,6 +722,7 @@ SELECT TOP  3
 	  ,[director]
       ,[cast]
       ,[country]
+      ,getdate() DateStamp
   FROM [Datasource].[dbo].[netflix_titles_csv]
   WHERE type='Movie'</property>
                 <property
@@ -748,6 +814,15 @@ SELECT TOP  3
                       lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[country]"
                       name="country"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[DateStamp]"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[DateStamp]"
+                      name="DateStamp"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -775,6 +850,10 @@ SELECT TOP  3
                       refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      name="DateStamp" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -812,6 +891,11 @@ SELECT TOP  3
                       dataType="nText"
                       lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[country]"
                       name="country" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[DateStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[DateStamp]"
+                      name="DateStamp" />
                     <outputColumn
                       refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -919,6 +1003,19 @@ SELECT TOP  3
                           name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
                       </properties>
                     </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[DateStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateStamp"
+                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[DateStamp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]}</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1003,6 +1100,19 @@ SELECT TOP  3
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[DateStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateStamp"
+                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[DateStamp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -1091,6 +1201,19 @@ SELECT TOP  3
                           name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
                       </properties>
                     </inputColumn>
+                    <inputColumn
+                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[DateStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateStamp"
+                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[DateStamp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]}</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1137,6 +1260,11 @@ SELECT TOP  3
                       dataType="nText"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]"
                       name="country" />
+                    <outputColumn
+                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[datestamp]"
+                      name="datestamp" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1182,7 +1310,7 @@ SELECT TOP  3
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="153.333333333334,42.6666666666667"
+          Size="153.142857142858,42.8571428571429"
           Id="Package\Movie ETL"
           TopLeft="58.1249991338699,41.0526323516613" />
       </GraphLayout>
@@ -1194,25 +1322,25 @@ SELECT TOP  3
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="125.333333333334,42.6666666666667"
-          Id="Package\Movie ETL\Netflix"
-          TopLeft="191.5,5.50000000000004" />
-        <NodeLayout
-          Size="122.666666666667,42.6666666666667"
+          Size="122.857142857143,42.8571428571429"
           Id="Package\Movie ETL\Union All"
           TopLeft="192.833333333333,108.166666666667" />
         <NodeLayout
-          Size="125.333333333334,42.6666666666667"
+          Size="125.142857142858,42.8571428571429"
+          Id="Package\Movie ETL\MovieInfo"
+          TopLeft="191.5,210.833333333334" />
+        <NodeLayout
+          Size="125.142857142858,42.8571428571429"
+          Id="Package\Movie ETL\Netflix"
+          TopLeft="191.5,5.50000000000004" />
+        <NodeLayout
+          Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Amazon"
           TopLeft="377.5,5.50000000000004" />
         <NodeLayout
-          Size="125.333333333334,42.6666666666667"
+          Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Disney"
-          TopLeft="5.50000000000002,5.50000000000004" />
-        <NodeLayout
-          Size="125.333333333334,42.6666666666667"
-          Id="Package\Movie ETL\MovieInfo"
-          TopLeft="191.5,210.833333333334" />
+          TopLeft="6.74999998137357,5.50000000000004" />
         <EdgeLayout
           Id="Package\Movie ETL.Paths[Union All Output 1]"
           TopLeft="254.166666666667,150.833333333333">
@@ -1259,30 +1387,30 @@ SELECT TOP  3
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Movie ETL.Paths[OLE DB Source Output1]"
-          TopLeft="68.1666666666667,48.1666666666667">
+          TopLeft="69.4166666480402,48.1666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="157.333333333333,60.0000000000001"
+              EndConnector="156.083333351959,60.0000000000003"
               Start="0,0"
-              End="157.333333333333,52.5000000000001">
+              End="156.083333351959,52.5000000000003">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.1489361702128" />
+                    End="0,35.148936170213" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,35.1489361702128"
-                    Point2="0,39.1489361702128"
-                    Point3="4,39.1489361702128" />
+                    Point1="0,35.148936170213"
+                    Point2="0,39.148936170213"
+                    Point3="4,39.148936170213" />
                   <mssgle:LineSegment
-                    End="153.333333333333,39.1489361702128" />
+                    End="152.083333351959,39.148936170213" />
                   <mssgle:CubicBezierSegment
-                    Point1="153.333333333333,39.1489361702128"
-                    Point2="157.333333333333,39.1489361702128"
-                    Point3="157.333333333333,43.1489361702128" />
+                    Point1="152.083333351959,39.148936170213"
+                    Point2="156.083333351959,39.148936170213"
+                    Point3="156.083333351959,43.148936170213" />
                   <mssgle:LineSegment
-                    End="157.333333333333,52.5000000000001" />
+                    End="156.083333351959,52.5000000000003" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1329,15 +1457,20 @@ SELECT TOP  3
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Netflix">
+    design-time-name="Package\Movie ETL\MovieInfo">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\MovieInfo">
+    design-time-name="Package\Movie ETL\Disney">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1363,15 +1496,10 @@ SELECT TOP  3
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Disney">
+    design-time-name="Package\Movie ETL\Netflix">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
