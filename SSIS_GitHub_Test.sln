@@ -5,13 +5,30 @@ VisualStudioVersion = 16.0.32901.82
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "SSIS_GitHub_Test", "SSIS_GitHub_Test.dtproj", "{E353DA9D-61C4-482D-88BD-05898466A135}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DataSink", "..\DataSink\DataSink.sqlproj", "{273D355F-809D-4B5C-9AC0-577968AB6115}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Development|Default = Development|Default
+		Debug|Any CPU = Debug|Any CPU
+		Development|Any CPU = Development|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E353DA9D-61C4-482D-88BD-05898466A135}.Development|Default.ActiveCfg = Development
-		{E353DA9D-61C4-482D-88BD-05898466A135}.Development|Default.Build.0 = Development
+		{E353DA9D-61C4-482D-88BD-05898466A135}.Debug|Any CPU.ActiveCfg = Development
+		{E353DA9D-61C4-482D-88BD-05898466A135}.Debug|Any CPU.Build.0 = Development
+		{E353DA9D-61C4-482D-88BD-05898466A135}.Development|Any CPU.ActiveCfg = Development
+		{E353DA9D-61C4-482D-88BD-05898466A135}.Development|Any CPU.Build.0 = Development
+		{E353DA9D-61C4-482D-88BD-05898466A135}.Release|Any CPU.ActiveCfg = Development
+		{E353DA9D-61C4-482D-88BD-05898466A135}.Release|Any CPU.Build.0 = Development
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273D355F-809D-4B5C-9AC0-577968AB6115}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
