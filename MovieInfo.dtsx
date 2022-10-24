@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{CF0B59A8-F0D4-4A6D-80F3-5805F793B91C}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{951D3A96-9D21-4FFF-AD3F-FAFBF45DF6DD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyotQEQABQ0GWo1nOuXvvoAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAA3r0IgI6YkI0jNiJgrVVT9k8BlOJxfQBqA33V/Mmp20QAAAAAOgAAAAAIAACAAAADe13+Ctzpie2FThem5fTzwIEnDoLTYUVS2kqi5Tk580CAAAAA2MMnuefqlxvEHXbHZGcJZjbGVmAq/oIfCtKWFI2r63kAAAAD5Nhqj5lA8mYAthXhqxiAUuOmkWLe+b5wkKOD9bHqnJxOWa0h+bNEley4PzD1kvnZcox5uhlhNmq0te6f4I+Tk</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAyotQEQABQ0GWo1nOuXvvoAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAbZM4H88bOfIVrmAPG2AWE6MZzWqBRcBVZNgHs6PShBQAAAAAOgAAAAAIAACAAAABTPkuvWmlW4hFhXGYPMpyTy2zpOAbHRHW5ujeKdIDllSAAAACqaKBWBuhYZ443OvFo2zyQHL5fssUrZVXM9QFxOShkw0AAAAAoWLe/rssVhjhZ68r8AmGSQzOipQrERXmio1r0dAqXUFy/e8isK3LHzn407hAGgZGfecd2N72PCjb3mTDgpPZx</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -37,53 +37,19 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\BUILD HORROR MOVIES"
+      DTS:refId="Package\BUILD SEINFELD TABLE"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Horror Movies are Built with this PROC "
-      DTS:DTSID="{F114B533-8791-49A1-A105-15944DC419CB}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{322C7D3F-1154-4675-A01B-D4CFC1806F0A}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="BUILD HORROR MOVIES"
-      DTS:ThreadHint="1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{1A47C6BD-18D6-4947-87E0-4A5696FC813A}"
-          SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="&#xA;    DROP  TABLE IF EXISTS   dbo.SciFi  &#xA;&#x9;CREATE TABLE dbo.SciFi (type nvarchar(max), title nvarchar(max), cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max), builtdate datetime)  &#xA;&#x9;INSERT &#xA;    INTO&#xA;        dbo.SciFi&#xA;        (type, title, cast, release_year, listed_in, description, builtdate) SELECT&#xA;            type,&#xA;            title,&#xA;            cast,&#xA;            release_year,&#xA;            listed_in,&#xA;            description,&#xA;            getdate()   &#xA;        FROM&#xA;            [Datasource].[dbo].[amazon_prime_titles]    &#xA;        WHERE&#xA;            listed_in LIKE '%HORROR%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\BUILD SCI FI"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Sci Fi Shows and Movies"
-      DTS:DTSID="{29837CA8-3733-43A2-BE7E-E1C9A50B37CB}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="BUILD SCI FI"
+      DTS:ObjectName="BUILD SEINFELD TABLE"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{2D324072-C90B-43A0-BE30-9AD60E4F46A8}"
-          SQLTask:SqlStatementSource="&#xA;    DROP  TABLE IF EXISTS   dbo.SciFi  &#xA;&#x9;CREATE TABLE dbo.SciFi (type nvarchar(max), title nvarchar(max), cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max), builtdate datetime)  &#xA;&#x9;INSERT &#xA;    INTO&#xA;        dbo.SciFi&#xA;        (type, title, cast, release_year, listed_in, description, builtdate) SELECT&#xA;            type,&#xA;            title,&#xA;            cast,&#xA;            release_year,&#xA;            listed_in,&#xA;            description,&#xA;            getdate()   &#xA;        FROM&#xA;            [Datasource].[dbo].[amazon_prime_titles]    &#xA;        WHERE&#xA;            listed_in LIKE '%Science Fiction%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\BUILD WESTERNS MOVIES"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="BUILD WESTERNS"
-      DTS:DTSID="{D3D58D95-B231-4A36-A2B7-AA7334327284}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="BUILD WESTERNS MOVIES"
-      DTS:ThreadHint="2">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{2D324072-C90B-43A0-BE30-9AD60E4F46A8}"
-          SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="DROP  TABLE IF EXISTS   dbo.Westerns  CREATE TABLE dbo.Westerns (type nvarchar(max), title nvarchar(max), cast nvarchar(max), release_year int, listed_in nvarchar(max), description nvarchar(max), builtdate datetime)  INSERT &#xA;    INTO&#xA;        dbo.Westerns&#xA;        (type, title, cast, release_year, listed_in, description, builtdate) SELECT&#xA;            type,&#xA;            title,&#xA;            cast,&#xA;            release_year,&#xA;            listed_in,&#xA;            description,&#xA;            getdate()   &#xA;        FROM&#xA;            [Datasource].[dbo].[amazon_prime_titles]    &#xA;        WHERE&#xA;            listed_in LIKE '%Western%'     " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;DROP TABLE IF EXISTS dbo.Netflix_Seinfeld&#xA;CREATE TABLE dbo.Netflix_Seinfeld&#xA;(typeid nvarchar(20), title nvarchar(max), director nvarchar(max), cast nvarchar(max), release_year int, description text)&#xA;INSERT INTO dbo.Netflix_Seinfeld (typeid, title, director, cast, release_year, description)&#xA;SELECT &#xA;[type],&#xA;[title],&#xA;[director]&#xA;      ,[cast]&#xA;      ,[release_year]&#xA;      ,[description]&#xA;  FROM [Datasource].[dbo].[netflix_titles_csv]&#xA;  WHERE TITLE LIKE '%Seinfeld%'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -132,7 +98,6 @@
 	  ,[director]
 	  ,[cast]
 	  ,[country]
-,getdate() DateField
   FROM [Datasource].[dbo].[amazon_prime_titles]
 
   WHERE Type='Movie'
@@ -227,15 +192,6 @@
                       lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[country]"
                       name="country"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[DateField]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[DateField]"
-                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[DateField]"
-                      name="DateField"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -263,10 +219,6 @@
                       refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].ExternalColumns[DateField]"
-                      dataType="dbTimeStamp"
-                      name="DateField" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -304,11 +256,6 @@
                       dataType="nText"
                       lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[country]"
                       name="country" />
-                    <outputColumn
-                      refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[DateField]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[DateField]"
-                      name="DateField" />
                     <outputColumn
                       refId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -358,11 +305,8 @@
 	  ,[director]
       ,[cast]
       ,[country]
-,getdate() DateField
   FROM [Datasource].[dbo].[disney_plus_titles]
-
-  WHERE type='Movie'
-ORDER BY NEWID()</property>
+  WHERE type='Movie'</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -452,15 +396,6 @@ ORDER BY NEWID()</property>
                       lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[country]"
                       name="country"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[DateField]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[DateField]"
-                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[DateField]"
-                      name="DateField"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -488,10 +423,6 @@ ORDER BY NEWID()</property>
                       refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].ExternalColumns[DateField]"
-                      dataType="dbTimeStamp"
-                      name="DateField" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -530,11 +461,6 @@ ORDER BY NEWID()</property>
                       lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[country]"
                       name="country" />
                     <outputColumn
-                      refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[DateField]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[DateField]"
-                      name="DateField" />
-                    <outputColumn
                       refId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
                       lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -567,7 +493,7 @@ ORDER BY NEWID()</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Movies_MoreInfo_TS]</property>
+                  name="OpenRowset">[dbo].[Movies_MoreInfo]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -659,12 +585,6 @@ ORDER BY NEWID()</property>
                       cachedName="country"
                       externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]" />
-                    <inputColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].Columns[SysTime]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="SysTime"
-                      externalMetadataColumnId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[uploadtime]"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[SysTime]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -692,14 +612,6 @@ ORDER BY NEWID()</property>
                       refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[moviekey]"
-                      dataType="i4"
-                      name="moviekey" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\MovieInfo.Inputs[OLE DB Destination Input].ExternalColumns[uploadtime]"
-                      dataType="dbTimeStamp"
-                      name="uploadtime" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -761,7 +673,6 @@ SELECT TOP  3
 	  ,[director]
       ,[cast]
       ,[country]
-      ,getdate() DateField
   FROM [Datasource].[dbo].[netflix_titles_csv]
   WHERE type='Movie'</property>
                 <property
@@ -853,15 +764,6 @@ SELECT TOP  3
                       lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[country]"
                       name="country"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[DateField]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[DateField]"
-                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[DateField]"
-                      name="DateField"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -889,10 +791,6 @@ SELECT TOP  3
                       refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[country]"
                       dataType="nText"
                       name="country" />
-                    <externalMetadataColumn
-                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].ExternalColumns[DateField]"
-                      dataType="dbTimeStamp"
-                      name="DateField" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -930,11 +828,6 @@ SELECT TOP  3
                       dataType="nText"
                       lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[country]"
                       name="country" />
-                    <outputColumn
-                      refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[DateField]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[DateField]"
-                      name="DateField" />
                     <outputColumn
                       refId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1042,19 +935,6 @@ SELECT TOP  3
                           name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
                       </properties>
                     </inputColumn>
-                    <inputColumn
-                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 1].Columns[DateField]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="DateField"
-                      lineageId="Package\Movie ETL\Amazon.Outputs[OLE DB Source Output].Columns[DateField]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[SysTime]}</property>
-                      </properties>
-                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1139,19 +1019,6 @@ SELECT TOP  3
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 2].Columns[DateField]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="DateField"
-                      lineageId="Package\Movie ETL\Disney.Outputs[OLE DB Source Output].Columns[DateField]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[SysTime]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -1240,19 +1107,6 @@ SELECT TOP  3
                           name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]}</property>
                       </properties>
                     </inputColumn>
-                    <inputColumn
-                      refId="Package\Movie ETL\Union All.Inputs[Union All Input 3].Columns[DateField]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="DateField"
-                      lineageId="Package\Movie ETL\Netflix.Outputs[OLE DB Source Output].Columns[DateField]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[SysTime]}</property>
-                      </properties>
-                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1299,11 +1153,6 @@ SELECT TOP  3
                       dataType="nText"
                       lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[country]"
                       name="country" />
-                    <outputColumn
-                      refId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[SysTime]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Movie ETL\Union All.Outputs[Union All Output 1].Columns[SysTime]"
-                      name="SysTime" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1349,21 +1198,13 @@ SELECT TOP  3
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="221.142857142858,42.2857142857143"
-          Id="Package\BUILD WESTERNS MOVIES"
-          TopLeft="247.777784341648,40.7727268308648" />
-        <NodeLayout
           Size="153.142857142858,42.8571428571429"
           Id="Package\Movie ETL"
           TopLeft="58.1249991338699,41.0526323516613" />
         <NodeLayout
-          Size="145.142857142858,42.2857142857143"
-          Id="Package\BUILD SCI FI"
-          TopLeft="195.000005165736,247.590906407715" />
-        <NodeLayout
-          Size="207.428571428572,42.2857142857143"
-          Id="Package\BUILD HORROR MOVIES"
-          TopLeft="353.33334269347,135.909089436216" />
+          Size="169.714285714286,42.2857142857143"
+          Id="Package\BUILD SEINFELD TABLE"
+          TopLeft="248.888895482193,38.999999577349" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1371,19 +1212,15 @@ SELECT TOP  3
     design-time-name="Package\Movie ETL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="122.857142857143,42.8571428571429"
-          Id="Package\Movie ETL\Union All"
-          TopLeft="192.833333333333,108.166666666667" />
-        <NodeLayout
-          Size="125.142857142858,42.8571428571429"
-          Id="Package\Movie ETL\MovieInfo"
-          TopLeft="191.5,210.833333333334" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Netflix"
           TopLeft="191.5,5.50000000000004" />
+        <NodeLayout
+          Size="122.857142857143,42.8571428571429"
+          Id="Package\Movie ETL\Union All"
+          TopLeft="192.833333333333,108.166666666667" />
         <NodeLayout
           Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Amazon"
@@ -1392,6 +1229,10 @@ SELECT TOP  3
           Size="125.142857142858,42.8571428571429"
           Id="Package\Movie ETL\Disney"
           TopLeft="5.50000000000002,5.50000000000004" />
+        <NodeLayout
+          Size="125.142857142858,42.8571428571429"
+          Id="Package\Movie ETL\MovieInfo"
+          TopLeft="191.5,210.833333333334" />
         <EdgeLayout
           Id="Package\Movie ETL.Paths[Union All Output 1]"
           TopLeft="254.166666666667,150.833333333333">
@@ -1411,9 +1252,7 @@ SELECT TOP  3
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1435,9 +1274,7 @@ SELECT TOP  3
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1471,9 +1308,7 @@ SELECT TOP  3
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1507,29 +1342,22 @@ SELECT TOP  3
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\MovieInfo">
+    design-time-name="Package\Movie ETL\Netflix">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Disney">
+    design-time-name="Package\Movie ETL\MovieInfo">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1555,10 +1383,15 @@ SELECT TOP  3
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Movie ETL\Netflix">
+    design-time-name="Package\Movie ETL\Disney">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
